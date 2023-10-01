@@ -60,10 +60,10 @@ public class BookStore {
     public  Set<Book> getAllBooksOrderedByYear() {
         return books;
     }
-//////•	Va returna un set cu toate genurile existente în colecția de cărți
+//////•	Va returna un set cu toate genurile existente în colecția de cărți / aici nu pot apela metodat getGenre() pe o carte book
     public Set<String> getAllGenres() {
         Set <String> geners = new HashSet<>();
-        //parcurg setul de carti si pentru fiecare carte salvez in set -ul geners fiecare gen si apoi returnez setul
+        //parcurg setul de carti si pentru fiecare carte salvez in set -ul geners fiecare gen si apoi returnez setul de genuri
         for (Book book: books) {
             geners.add(book.getGenre());
         }
