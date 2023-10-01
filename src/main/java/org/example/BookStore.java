@@ -35,9 +35,11 @@ import java.util.*;
 ////•	Va returna toate cărțile care au acel gen (HINT: valoarea de la o anumită cheie din mapă)
 public class BookStore {
     private Set<Book> books;
+    private Map<String, Set<Book>> booksByGenre;
 
-    public BookStore(Set<Book> books) {
-        this.books = books;
+    public BookStore() {
+        books = new HashSet<>();
+        booksByGenre = new HashMap<>();
     }
 
     public Set<Book> getBooks() {
@@ -55,11 +57,8 @@ public class BookStore {
         books.remove(book);
     }
 ////•	Va returna valoarea atributului books
-    public  List<Book> getAllBooksOrderedByYear() {
-        List<Book> allBooksOrderedByYear = new ArrayList<>();
-        allBooksOrderedByYear.addAll(books);
-        Collections.sort(allBooksOrderedByYear);
-        return allBooksOrderedByYear;
+    public  Set<Book> getAllBooksOrderedByYear() {
+        return books;
     }
 //////•	Va returna un set cu toate genurile existente în colecția de cărți
     public Set<String> getAllGenres() {
@@ -70,12 +69,10 @@ public class BookStore {
         }
         return geners;
     }
+    //tree setul va tine cartile ordonate dupa autor
     public TreeSet<Book> getAllBooksOrderedByAuthor() {
-        List<Book> allBooksOrderedByAuthor = new ArrayList<>();
         TreeSet<Book> booksOrderedByAuthor = new TreeSet<>();
-        allBooksOrderedByAuthor.addAll(books);
-        allBooksOrderedByAuthor.sort(new AuthorComparator());
-        booksOrderedByAuthor.addAll(allBooksOrderedByAuthor);
+        booksOrderedByAuthor.addAll(books);
         return booksOrderedByAuthor;
     }
 
@@ -85,34 +82,19 @@ public class BookStore {
 // iar valoarea lista de cărți cu acel gen)
         //voi pune in cheia mapei setul returnat de metoda getAllGeners
         //voi parcurge lista e carti si pentru fiecare gen de carti salvat in lista voi pune intr o alta lista cartea respectiva
-    public Map<String, List<Book>>  getAllBooksByGenre() {
-        Map<String, List<Book>> allBooksByGenre = new HashMap<>();
-        List<String> keyForMap = new ArrayList<>();
-        List<Book> keyValue = new ArrayList<>();
-        keyForMap.addAll(getAllGenres());
-        for (int i = 0; i < keyForMap.size(); i++){
-            String genre = keyForMap.get(i);
-            for (Book book:books) {
-                if (genre.equals(book.getGenere())) {
-                    keyValue.add(book);
-                }
-            }
-        }
-        for (String s: keyForMap) {
-            allBooksByGenre.put(s, keyValue);
-        }
-        return allBooksByGenre;
+    public Map<String, Set<Book>>  getAllBooksByGenre() {
+        return booksByGenre;
+
     }
-    public List<Book> getBooksByGenre(Book genre) {
+    public Set<Book> getBooksByGenre(String genre) {
         List<Book> booksByGenre = new ArrayList<>();
         //daca genul dat ca parametru se gaseste la o cheie din mapa atunci se va returna valoarea
         // corespunzatoare acelei chei din mapa
-        for (Book book:books) {
-            if (genre.equals(getAllBooksByGenre().get(book.getGenre()))) {
-                booksByGenre.add(book);
-            }
-        }
-        return booksByGenre;
+       if (!(booksByGenre.contains(genre))) {
+           return null;
+       } else {
+           return booksByGenre.get(genre);
+       }
     }
 
 }

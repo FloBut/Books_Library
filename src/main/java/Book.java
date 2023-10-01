@@ -1,4 +1,4 @@
-public class Book implements Comparable<Book>{
+public class Book {
 
    private  String year;
    private String title;
@@ -44,10 +44,6 @@ public class Book implements Comparable<Book>{
       this.author = author;
    }
 
-   @Override
-   public int compareTo(Book o) {
-      return (year.compareTo(o.getYear()));
-   }
 }
 ////Librăria va trebui să conțină o colecție de cărți. Fiecare carte are atributele: year, title, genre (gen) și author.
 ////Librăria va trebui să implementeze următoarele funcționalități:

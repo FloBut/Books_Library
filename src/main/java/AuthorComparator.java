@@ -3,7 +3,8 @@ import java.util.Comparator;
 public class AuthorComparator implements Comparator<Book> {
 
     @Override
-    public int compare(Book o1, Book o2) {
-        return (o1.getAuthor().compareTo(o2.getAuthor()));
+    public int compare(Book book1, Book book2) {
+
+        return (book1.getAuthor().compareTo(book2.getAuthor()));
     }
 }
